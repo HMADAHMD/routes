@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:routes/ScreenTwo.dart';
 import 'package:routes/ThirdScreen.dart';
@@ -5,6 +7,9 @@ import 'package:routes/ThirdScreen.dart';
 void main() {
   runApp(MyApp());
 }
+
+var screen1color = Color.fromARGB(255, 235, 21, 254);
+var screen2color = Color.fromARGB(255, 41, 33, 255);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,7 +20,7 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       routes: {
         //'/secScreen': (context) =>  ScreenTwo(),
-        '/thirdScreen': (context) => ThirdScreen(),
+        //'/thirdScreen': (context) => ThirdScreen(),
       },
     );
   }
@@ -49,11 +54,33 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          ReusableButton(),
+          ReusableButton(
+            color: screen1color,
+            Textchild: const Text(
+              "Screen 2",
+              style: TextStyle(fontSize: 30),
+            ),
+            Working: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ScreenTwo(value: value);
+              }));
+            },
+          ),
           const SizedBox(
             height: 20,
           ),
-          ReusableButton()
+          ReusableButton(
+            color: screen2color,
+            Textchild: const Text(
+              'Screen 3',
+              style: TextStyle(fontSize: 30),
+            ),
+            Working: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ThirdScreen(value: value);
+              }));
+            },
+          )
         ],
       ),
     );
@@ -61,34 +88,21 @@ class HomeScreen extends StatelessWidget {
 }
 
 class ReusableButton extends StatelessWidget {
-  const ReusableButton({
-    Key? key,
-  }) : super(key: key);
+  ReusableButton(
+      {required this.color, required this.Textchild, required this.Working});
+  Color color;
+  Widget Textchild;
+  Function Working;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, '/thirdScreen');
+      child: ElevatedButton(
+        child: Textchild,
+        onPressed: () {
+          Working();
         },
-        child: Container(
-          height: 60,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 235, 21, 254),
-              borderRadius: BorderRadius.circular(7)),
-          child: const Center(
-            child: Text(
-              "Screen 3",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
       ),
     );
   }

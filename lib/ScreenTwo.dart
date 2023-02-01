@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ScreenTwo extends StatelessWidget {
   
   ScreenTwo({super.key, required this.value});
@@ -14,7 +13,7 @@ class ScreenTwo extends StatelessWidget {
         ),
         body: Center(
             child: Container(
-          child: Text("the passed value is " + value),
+          child: Text("the value is => "+value),
         )),
       ),
     );
