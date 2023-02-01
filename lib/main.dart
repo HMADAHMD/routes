@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:routes/ScreenTwo.dart';
 import 'package:routes/ThirdScreen.dart';
@@ -73,7 +71,9 @@ class HomeScreen extends StatelessWidget {
             color: screen2color,
             Textchild: const Text(
               'Screen 3',
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(
+                fontSize: 30,
+              ),
             ),
             Working: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -98,11 +98,15 @@ class ReusableButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ElevatedButton(
-        child: Textchild,
-        onPressed: () {
-          Working();
-        },
+      child: SizedBox(
+        height: 50,
+        width: double.infinity,
+        child: ElevatedButton(
+            child: Textchild,
+            onPressed: () {
+              Working();
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: color)),
       ),
     );
   }
